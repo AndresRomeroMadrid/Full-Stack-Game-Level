@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Level-Up Gamer | Inicio</title>
+  <meta name="description" content="Tienda online gamer en Chile: consolas, accesorios, PC gamers, sillas y más." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="theme-dark">
+  <header class="navbar" role="banner">
+    <div class="navbar__brand">
+      <a href="index.html" class="navbar__logo" aria-label="Inicio Level-Up Gamer">
+        <img src="assets/img/logo.svg" alt="Level-Up Gamer" />
+      </a>
+    </div>
+
+    <nav class="navbar__nav" role="navigation" aria-label="Principal">
+      <a class="nav__link" href="index.html">Inicio</a>
+      <a class="nav__link" href="catalogo.html">Catálogo</a>
+      <a class="nav__link" href="registro.html">Registro</a>
+      <a class="nav__link" href="carrito.html" aria-label="Carrito">
+        Carrito <span id="cart-badge" class="badge" aria-live="polite">0</span>
+      </a>
+    </nav>
+
+    <!-- Redes sociales en el header -->
+    <div class="navbar__social" aria-label="Síguenos en redes">
+      <span class="social__label hide-xs">Síguenos</span>
+
+      <a class="soc soc--fb" href="https://facebook.com/tu-pagina" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.35 2 1.87 6.48 1.87 12.07c0 4.99 3.65 9.13 8.43 9.93v-7.02H7.9v-2.91h2.4V9.41c0-2.37 1.41-3.68 3.57-3.68 1.03 0 2.11.18 2.11.18v2.32h-1.19c-1.17 0-1.54.73-1.54 1.49v1.79h2.63l-.42 2.91h-2.21v7.02c4.78-.8 8.43-4.94 8.43-9.93z"/>
+        </svg>
+      </a>
+
+      <a class="soc soc--tw" href="https://twitter.com/tu-usuario" target="_blank" rel="noopener" aria-label="X/Twitter">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.21 3H20l-6.54 7.47L21 21h-5.98l-4.68-5.6L4.84 21H2l7.16-8.17L3 3h6.08l4.26 5.06L17.21 3Zm-1.52 16.03h2.07L8.41 4.9H6.26l9.43 14.13Z"/>
+        </svg>
+      </a>
+
+      <a class="soc soc--ig" href="https://instagram.com/tu-usuario" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.96.24 2.67.52.72.28 1.33.66 1.93 1.26.6.6.98 1.21 1.26 1.93.28.71.47 1.5.52 2.67.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.96-.52 2.67-.28.72-.66 1.33-1.26 1.93-.6.6-1.21.98-1.93 1.26-.71.28-1.5.47-2.67.52-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.96-.24-2.67-.52a5.35 5.35 0 0 1-1.93-1.26 5.35 5.35 0 0 1-1.26-1.93c-.28-.71-.47-1.5-.52-2.67C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.96.52-2.67.28-.72.66-1.33 1.26-1.93.6-.6 1.21-.98 1.93-1.26.71-.28 1.5-.47 2.67-.52C8.42 2.17 8.8 2.16 12 2.16Zm0 1.8c-3.14 0-3.51.01-4.75.07-.98.05-1.51.21-1.86.35-.47.18-.8.39-1.15.73-.34.35-.55.68-.73 1.15-.14.35-.3.88-.35 1.86-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.05.98.21 1.51.35 1.86.18.47.39.8.73 1.15.35.34.68.55 1.15.73.35.14.88.3 1.86.35 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c.98-.05 1.51-.21 1.86-.35.47-.18.8-.39 1.15-.73.34-.35.55-.68.73-1.15.14-.35.3-.88.35-1.86.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.05-.98-.21-1.51-.35-1.86a3.59 3.59 0 0 0-.73-1.15 3.59 3.59 0 0 0-1.15-.73c-.35-.14-.88-.3-1.86-.35-1.24-.06-1.61-.07-4.75-.07Zm0 3.41a4.63 4.63 0 1 1 0 9.26 4.63 4.63 0 0 1 0-9.26Zm0 1.8a2.83 2.83 0 1 0 0 5.66 2.83 2.83 0 0 0 0-5.66Zm5.89-2.02a1.08 1.08 0 1 1 0 2.16 1.08 1.08 0 0 1 0-2.16Z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">Sube de nivel tu setup 🎮</h1>
+        <p class="hero__subtitle">Consolas, accesorios, PC gamers y más — despacho a todo Chile.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="catalogo.html">Ver catálogo</a>
+          <a class="btn btn--ghost" href="#categorias">Explorar categorías</a>
+        </div>
+      </div>
+      <figure class="hero__media" aria-hidden="true">
+        <img src="assets/img/placeholder.png" alt="" />
+      </figure>
+    </section>
+
+    <!-- CATEGORÍAS (Carrusel controlado por usuario) -->
+    <section id="categorias" class="section categorias">
+      <h2 class="section__title">Categorías</h2>
+
+      <div class="carousel-wrap" data-carousel="cats">
+        <button class="carousel-btn carousel-btn--prev" aria-label="Anterior" title="Anterior">‹</button>
+
+        <div class="carousel" id="cat-carousel">
+          <article class="card cat cat--consolas"     data-cat="Consolas"><h3 class="card__title">Consolas</h3></article>
+          <article class="card cat cat--accesorios"   data-cat="Accesorios"><h3 class="card__title">Accesorios</h3></article>
+          <article class="card cat cat--computadores" data-cat="Computadores Gamers"><h3 class="card__title">Computadores Gamers</h3></article>
+          <article class="card cat cat--sillas"       data-cat="Sillas Gamers"><h3 class="card__title">Sillas Gamers</h3></article>
+          <article class="card cat cat--mouse"        data-cat="Mouse"><h3 class="card__title">Mouse</h3></article>
+          <article class="card cat cat--mousepad"     data-cat="Mousepad"><h3 class="card__title">Mousepad</h3></article>
+          <article class="card cat cat--juegos"       data-cat="Juegos de Mesa"><h3 class="card__title">Juegos de Mesa</h3></article>
+          <article class="card cat cat--poleras"      data-cat="Poleras Personalizadas"><h3 class="card__title">Poleras Personalizadas</h3></article>
+          <article class="card cat cat--polerones"    data-cat="Polerones Gamers Personalizados"><h3 class="card__title">Polerones Personalizados</h3></article>
+        </div>
+
+        <button class="carousel-btn carousel-btn--next" aria-label="Siguiente" title="Siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- DESTACADOS -->
+    <section class="section destacados">
+      <h2 class="section__title">Destacados</h2>
+      <div class="grid grid--products" id="home-products">
+
+        <article class="card product" data-codigo="CO001" data-nombre="PlayStation 5" data-precio="549990">
+          <img class="product__img" src="imagenes/play5.png" alt="PlayStation 5" loading="lazy" />
+          <h3 class="product__title">PlayStation 5</h3>
+          <p class="product__desc">Consola de nueva generación con cargas ultrarrápidas y gráficos impresionantes.</p>
+          <p class="product__price">$549.990</p>
+          <button class="btn btn--add add-to-cart">Agregar</button>
+        </article>
+
+        <article class="card product" data-codigo="AC002" data-nombre="HyperX Cloud II" data-precio="79990">
+          <img class="product__img" src="imagenes/audifonos.jpg" alt="Auriculares HyperX Cloud II" loading="lazy" />
+          <h3 class="product__title">HyperX Cloud II</h3>
+          <p class="product__desc">Sonido envolvente, micrófono desmontable y comodidad para largas sesiones.</p>
+          <p class="product__price">$79.990</p>
+          <button class="btn btn--add add-to-cart">Agregar</button>
+        </article>
+
+        <article class="card product" data-codigo="MS001" data-nombre="Logitech G502 HERO" data-precio="49990">
+          <img class="product__img" src="imagenes/mouse.jpg" alt="Mouse Logitech G502 HERO" loading="lazy" />
+          <h3 class="product__title">Logitech G502 HERO</h3>
+          <p class="product__desc">Sensor de alta precisión, pesos ajustables y botones programables.</p>
+          <p class="product__price">$49.990</p>
+          <button class="btn btn--add add-to-cart">Agregar</button>
+        </article>
+
+        <article class="card product" data-codigo="PC001" data-nombre="PC Gamer" data-precio="980000">
+          <img class="product__img" src="imagenes/computador.webp" alt="Computador Gamer" loading="lazy" />
+          <h3 class="product__title">PC Gamer</h3>
+          <p class="product__desc">El mejor PC gamer del mercado pensado en la mejor jugabilidad posible.</p>
+          <p class="product__price">$980.000</p>
+          <button class="btn btn--add add-to-cart">Agregar</button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="section video">
+      <h2 class="section__title">Último review</h2>
+      <div class="video__frame">
+        <video controls autoplay muted loop playsinline>
+          <source src="imagenes/trailer.mp4" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS (ruta corregida) -->
+  <script src="assets/js/funcion.js" defer></script>
+
+  <!-- Font Awesome para íconos (no es necesario para estos SVG, lo dejamos como lo tenías) -->
+  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+</body>
+
+<!-- FOOTER -->
+<footer class="footer-main">
+  <div class="footer-container">
+
+    <!-- Logo -->
+    <div class="footer-col">
+      <img src="assets/img/logo.svg" alt="Level-Up Gamer" class="footer-logo">
+    </div>
+
+    <!-- Horario -->
+    <div class="footer-col">
+      <h3>HORARIO DE ATENCIÓN</h3>
+      <p>Lunes a Viernes:<br>De 08:00 AM a 17:30</p>
+      <p>Email: soporte@levelupgamer.com</p>
+    </div>
+
+    <!-- Corporativo -->
+    <div class="footer-col">
+      <h3>CORPORATIVO</h3>
+      <ul>
+        <li><a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Conoce Nuestras Tiendas</a></li>
+        <li><a href="https://www.gob.cl/noticias/atencion-consumidores-conoce-el-derecho-la-garantia-legal-de-los-productos-que-compraste-en-estas-fiestas-de-fin-de-ano/" target="_blank" rel="noopener noreferrer">Politca de Devoluciones</a></li>
+        <li><a href="https://www.ship24.com/es/tiendas/seguimiento-mercado-libre" target="_blank" rel="noopener noreferrer">Seguimientos de Pedidos</a></li>
+        <li><a href="https://movistargameclub.cl/eventos" target="_blank" rel="noopener noreferrer">Sigue lo Mejor del Gamer</a></li>
+      </ul>
+    </div>
+
+    <!-- Mi cuenta -->
+    <div class="footer-col">
+      <h3>MI CUENTA</h3>
+      <ul>
+        <li><a href="#">Historial de pedidos</a></li>
+        <li><a href="#">Favoritos</a></li>
+        <li><a href="#">Mi cuenta</a></li>
+        <li><a href="#">Mis direcciones</a></li>
+      </ul>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="footer-col">
+      <a href="https://wa.me/56975834364" target="_blank" class="btn btn--primary" style="display:inline-flex;align-items:center;gap:8px;">
+        📱 Escríbenos por WhatsApp
+      </a>
+    </div>
+  </div>
+</footer>
+
+</html>

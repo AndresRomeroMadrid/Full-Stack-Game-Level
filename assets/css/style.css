@@ -1,0 +1,522 @@
+/* =======================================================
+   Variables globales (colores, tamaños, radios, etc.)
+   ======================================================= */
+:root{
+  --bg:#000;            /* color de fondo principal */
+  --ink:#fff;           /* color de texto principal */
+  --ink-muted:#d3d3d3;  /* color de texto secundario */
+  --accent-1:#1E90FF;   /* color de acento (botones primarios) */
+  --accent-2:#39FF14;   /* color de acento 2 (botones “Agregar”) */
+  --card:#0f0f10;       /* color de tarjetas */
+  --ring:#39FF14;          /* color de bordes/sutiles líneas */
+  --shadow:0 8px 24px rgba(0,0,0,.25); /* sombra estándar */
+  --radius:16px;        /* radio de borde estándar */
+  --maxw:1200px;        /* ancho máximo del contenedor principal */
+}
+
+/* =======================================================
+   Base / reset simple
+   ======================================================= */
+*{box-sizing:border-box}                /* incluye padding/border en el cálculo del ancho/alto */
+html,body{margin:0;padding:0}          /* quita márgenes/padding por defecto */
+body{
+  font-family:'Roboto',system-ui,Segoe UI,Arial,sans-serif; /* tipografía base */
+  background:var(--bg);                /* fondo negro general */
+  color:var(--ink);                    /* texto blanco */
+  line-height:1.5;                     /* altura de línea cómoda */
+}
+img{max-width:100%;display:block}      /* las imágenes no desbordan y se muestran como bloque */
+a{color:var(--ink);text-decoration:none}/* enlaces sin subrayado con color del texto */
+a:focus,button:focus,input:focus,select:focus,textarea:focus{
+  outline:2px solid var(--accent-1);   /* enfoque accesible (borde visible) */
+  outline-offset:2px;
+}
+.muted{color:var(--ink-muted)}          /* texto atenuado */
+
+.main{max-width:var(--maxw);margin:0 auto;padding:24px}  /* contenedor central */
+.section{margin:48px 0}                                  /* separación entre secciones */
+.section__title{
+  font-family:'Orbitron',sans-serif;    /* título con tipografía display */
+  font-weight:700;letter-spacing:.5px;margin-bottom:16px;
+}
+
+/* =======================================================
+   Navbar (barra superior fija)
+   ======================================================= */
+.navbar{
+  position:sticky;top:0;z-index:10;                     /* se mantiene arriba al hacer scroll */
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(6px); /* efecto vidrio */
+  border-bottom:1px solid var(--ring);
+}
+.navbar__logo img{height:32px}                          /* alto del logo */
+.navbar__nav{display:flex;gap:16px;align-items:center}  /* nav en fila con separación */
+.nav__link{padding:8px 10px;border-radius:10px}
+.nav__link:hover{background:var(--ring)}                /* hover sutil */
+.badge{
+  display:inline-block;min-width:20px;padding:2px 6px;
+  background:var(--accent-1);color:#000;border-radius:999px;
+  font-weight:700;font-size:12px;                       /* contador del carrito */
+}
+
+/* =======================================================
+   Hero (layout + imagen de fondo + overlay)
+   ======================================================= */
+.hero{
+  display:grid;grid-template-columns:1.2fr .8fr;         /* texto + imagen */
+  gap:24px;align-items:center;
+  padding:24px;border:1px solid var(--ring);border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+  border-color: #39FF14;
+
+  /* Fondo del hero (ajusta la ruta/imagen según tus archivos) */
+  background-image: url("../../imagenes/logo.png");
+  background-size: cover;
+  background-position: 40% 20%;                         /* mueve el encuadre del fondo */
+}
+.hero::before{
+  /* overlay oscuro para legibilidad del texto sobre el fondo */
+  content:"";position:absolute;inset:0;z-index:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.8) 100%);
+}
+.hero__content,.hero__media{position:relative;z-index:1} /* por encima del overlay */
+.hero__title{
+  font-family:'Orbitron',sans-serif;                    /* título grande */
+  font-size:clamp(28px,4vw,48px);margin:0 0 8px;
+}
+.hero__subtitle{color:var(--ink-muted);margin-bottom:16px}
+.hero__actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero__media img{border-radius:var(--radius);border:1px solid var(--ring)}
+
+/* =======================================================
+   Botones genéricos
+   ======================================================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 16px;border-radius:12px;border:1px solid var(--ring);
+  cursor:pointer;font-weight:600;
+}
+.btn--primary{background:var(--accent-1);color:#000} /* CTA principal */
+.btn--ghost{background:transparent;color:var(--ink-muted)} /* secundario */
+.btn--add{background:var(--accent-2);color:#000}     /* botón “Agregar” */
+
+/* =======================================================
+   Grillas y tarjetas
+   ======================================================= */
+.grid{display:grid;gap:16px}
+.grid--categories{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.grid--products  {grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);
+  padding:16px;box-shadow:var(--shadow);
+}
+.card .card__title{
+  font-weight:700;font-family:'Orbitron',sans-serif;
+}
+.product__title{margin:0 0 4px}
+.product__desc {margin:0 0 8px;color:var(--ink-muted)}
+.product__price{color:var(--ink-muted);margin:0 0 10px}
+
+.card{
+  border-color: #39FF14;
+}
+
+
+
+/* =======================================================
+   Video responsivo (16:9)
+   ======================================================= */
+.video__frame {
+  position: relative;
+  width: 80%;        /* 🔹 Ancho relativo al contenedor padre */
+  max-width: 900px;  /* 🔹 Ancho máximo */
+  height: 500px;     /* 🔹 Alto fijo que puedes cambiar */
+  margin: 0 auto;    /* Centra horizontalmente */
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--ring);
+}
+
+.video__frame video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔹 Mantiene proporciones y llena */
+  border-radius: var(--radius);
+}
+
+
+
+
+/* =======================================================
+   Formulario / Estados de error accesibles
+   ======================================================= */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field--error input,.field--error select,.field--error textarea{
+  border:1px solid #ff4d4f;                             /* rojo de error */
+  box-shadow:0 0 0 2px rgba(255,77,79,.2);
+}
+.field__hint{min-height:18px;color:#ffb4b6;font-size:.9rem} /* mensaje de error */
+input,select,textarea{
+  padding:10px 12px;border-radius:10px;border:1px solid var(--ring);
+  background:#0b0b0c;color:var(--ink);
+}
+
+/* =======================================================
+   Responsive: hero a 1 columna en pantallas pequeñas
+   ======================================================= */
+@media (max-width:900px){ .hero{grid-template-columns:1fr} }
+
+/* =======================================================
+   Tarjetas de categorías con imagen de fondo
+   ======================================================= */
+.cat{
+  position: relative;min-height: 140px;display: flex;align-items: flex-end;
+  padding: 16px;border-radius: var(--radius);overflow: hidden;
+  background-size: cover;background-position: center;color: #fff;
+}
+.cat::before{
+  /* degradado para mejorar el contraste con el texto */
+  content: "";position: absolute;inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%);
+}
+.cat .card__title{
+  position:relative;z-index:1;margin:0;text-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+
+/* Mapeo de imágenes para cada categoría (rutas relativas al CSS) */
+.cat--consolas     { background-image: url("../../imagenes/consolas.png"); }
+.cat--accesorios   { background-image: url("../../imagenes/accesorios.jpg"); }
+.cat--computadores { background-image: url("../../imagenes/computador.webp"); }
+.cat--sillas       { background-image: url("../../imagenes/silla.jpg"); }
+.cat--mouse        { background-image: url("../../imagenes/mouse.jpg"); }
+.cat--mousepad     { background-image: url("../../imagenes/mousepad.jpg"); }
+.cat--juegos       { background-image: url("../../imagenes/juegos.jpeg"); }
+.cat--poleras      { background-image: url("../../imagenes/poleras.jpg"); }
+.cat--polerones    { background-image: url("../../imagenes/polerones.jpg"); }
+
+@media (min-width:768px){ .cat{ min-height:180px } } /* un poco más altas en desktop */
+
+/* =======================================================
+   (Opción A – si usaras <img> para productos)
+   Nota: Este bloque sirve cuando product__img es <img>.
+   En Opción B lo dejamos, pero el de abajo (fondos CSS)
+   es el que realmente se aplica por estar después.
+   ======================================================= */
+.product__img{
+  width:100%;height:180px;object-fit: cover;            /* recorta la imagen sin deformarla */
+  border-radius:10px;margin-bottom:8px;border:1px solid var(--ring);
+  
+}
+
+/* =======================================================
+   Carrusel horizontal controlado por el usuario (categorías)
+   ======================================================= */
+.carousel-wrap{                 /* contenedor que deja espacio a flechas */
+  position: relative;padding: 0 48px;
+}
+.carousel{
+  display: flex;gap: 16px;overflow-x: auto;             /* scroll horizontal */
+  scroll-behavior: smooth;scroll-snap-type: x mandatory;/* anclaje por tarjeta */
+  -webkit-overflow-scrolling: touch;                    /* inercia en iOS */
+}
+.carousel::-webkit-scrollbar{ height: 8px; }            /* personalización del scroll */
+.carousel::-webkit-scrollbar-thumb{ background: #333; border-radius: 999px; }
+.carousel::-webkit-scrollbar-track{ background: #111; }
+.carousel .cat{
+  flex: 0 0 auto;width: 300px;scroll-snap-align: start; /* cada tarjeta mide 300px */
+}
+
+/* Flechas del carrusel */
+.carousel-btn{
+  position: absolute;top: 50%;transform: translateY(-50%);
+  width: 40px;height: 40px;display: grid;place-items: center;
+  border-radius: 999px;border: 1px solid var(--ring);
+  background: rgba(10,10,12,.7);color: #fff;cursor: pointer;z-index: 5;
+  backdrop-filter: blur(6px);transition: transform .15s ease, opacity .15s ease;
+  border-color: #39FF14;
+}
+.carousel-btn:hover{ transform: translateY(-50%) scale(1.05); }
+.carousel-btn[disabled]{ opacity: .35; cursor: not-allowed; }
+.carousel-btn--prev{ left: 4px; }                        /* flecha izquierda */
+.carousel-btn--next{ right: 4px; }                       /* flecha derecha */
+.carousel.is-dragging{ cursor: grabbing; }              /* feedback al arrastrar */
+
+/* =======================================================
+   (Opción B – Catálogo con <div class="product__img product--X">)
+   Aquí la imagen se pinta como FONDO por clase.
+   Este bloque sobrescribe al de <img> por aparecer después.
+   ======================================================= */
+.product__img{
+  width:100%;height:180px;border-radius:10px;margin-bottom:8px;border:1px solid var(--ring);
+  background-size: cover;background-position: center;background-repeat: no-repeat;
+  background-color:#0b0b0c; /* color de respaldo si falla la imagen */
+}
+
+/* Mapeo de imágenes por producto (rutas relativas al CSS) */
+.product--ps5      { background-image: url("../../imagenes/play5.png"); }
+.product--hyperx   { background-image: url("../../imagenes/audifonos.jpg"); }
+.product--logitech { background-image: url("../../imagenes/mouse.jpg"); }
+.product--razer    { background-image: url("../../imagenes/mousepad.jpg"); }
+.product--catan    { background-image: url("../../imagenes/juegos.jpeg"); }
+.product--pcgamer  { background-image: url("../../imagenes/computador.webp"); }
+.product--silla    { background-image: url("../../imagenes/silla.jpg"); }
+.product--polera   { background-image: url("../../imagenes/poleras.jpg"); }
+.product--poleron  { background-image: url("../../imagenes/polerones.jpg"); }
+
+
+/* Animación al pasar el mouse en los productos */
+
+.product {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* animación suave */
+}
+
+.product:hover {
+  transform: translateY(-10px) scale(1.03); /* se levanta un poco y aumenta tamaño */
+  box-shadow: 0 14px 30px rgba(57, 255, 20, 0.4); /* sombra verde brillante */
+  border-color: var(--accent-2); /* borde verde más notorio */
+}
+
+/* Opcional: animar también la imagen del producto */
+.product__img {
+  transition: transform 0.3s ease;
+}
+
+.product:hover .product__img {
+  transform: scale(1.05); /* zoom sutil en la imagen */
+}
+
+
+/* ===========================
+   Carrusel: mejoras SOLO CSS
+   =========================== */
+
+/* 1) Suavidad y “fade” en los bordes (sugiere que hay más contenido) */
+.carousel{
+  scroll-snap-type: x mandatory;      /* ya lo usas, lo reafirmamos */
+  scroll-behavior: smooth;            /* scroll suave al arrastrar */
+  -webkit-overflow-scrolling: touch;
+  /* desvanecido en bordes (soporte moderno) */
+  mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  scrollbar-width: none;              /* Firefox: oculta barra */
+}
+.carousel::-webkit-scrollbar{ display:none } /* Chrome/Safari */
+
+/* 2) Tarjetas: “lift + glow” al hover y foco, con transición suave */
+.carousel .cat{
+  flex: 0 0 auto;
+  width: 300px;                        /* tu ancho de tarjeta */
+  scroll-snap-align: start;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    filter .35s ease,
+    border-color .35s ease;
+  will-change: transform;
+}
+
+.carousel .cat:hover,
+.carousel .cat:focus-visible{
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(57,255,20,.35);
+  border-color: var(--accent-2);
+  outline: none;
+}
+
+/* 3) “Enfoque de atención”: al hacer hover en una, el resto se atenúa */
+.carousel:has(.cat:hover) .cat:not(:hover){
+  filter: saturate(.8) brightness(.85);
+}
+
+/* 4) Parallax sutil en el fondo (si tus cat usan background-image) */
+.carousel .cat{
+  background-size: cover;
+  background-position: center;
+}
+.carousel .cat:hover{
+  background-position: 52% 48%;
+}
+
+/* 5) “Shine”/destello rápido al pasar el mouse */
+.carousel .cat::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: linear-gradient(75deg, transparent 0, rgba(255,255,255,.12) 12%, transparent 28%);
+  transform: translateX(-120%);
+  transition: transform .9s ease;
+  border-radius: inherit;
+}
+.carousel .cat:hover::after{
+  transform: translateX(120%);
+}
+
+/* 6) Botones del carrusel: micro animación */
+.carousel-btn{
+  transition: transform .90s ease, opacity .90s ease, box-shadow .90s ease;
+}
+.carousel-btn:hover{ transform: translateY(-50%) scale(1.08); box-shadow:0 0 0 3px rgba(57,255,20,.25); }
+
+/* 7) Accesibilidad: foco visible coherente */
+.carousel .cat:focus-visible{
+  outline: 10px solid var(--accent-1);
+  outline-offset: 8px;
+}
+
+
+.hero {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* animación suave */
+}
+
+.hero:hover {
+  transform: translateY(-10px) scale(1.03); /* se levanta un poco y aumenta tamaño */
+  box-shadow: 0 14px 30px rgba(57, 255, 20, 0.4); /* sombra verde brillante */
+  border-color: var(--accent-2); /* borde verde más notorio */
+}
+
+/* Opcional: animar también la imagen del producto */
+.hero__actions {
+  transition: transform 0.3s ease;
+}
+
+.hero:hover .hero__img {
+  transform: scale(1.05); /* zoom sutil en la imagen */
+}
+
+.social-footer {
+  position: center;
+  bottom: 20px; 
+  right: 20px;
+  display: contents;
+  flex-direction: column;   /* apilados */
+  gap: 12px;
+  z-index: 1000;
+}
+
+
+.social-footer {
+  position: fixed;
+  bottom: 20px; 
+  right: 20px;
+  display: flex;
+  flex-direction: column;   /* apilados */
+  gap: 12px;
+  z-index: 1000;
+}
+
+.social-footer a img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1); /* logos blancos */
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.social-footer a img:hover {
+  transform: scale(1.2);          /* animación al pasar el mouse */
+  filter: brightness(1) invert(0); /* cambia a color original */
+}
+
+.footer {
+  background: linear-gradient(90deg, #00c6ff, #0072ff); /* azul degradado */
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.social-icons a {
+  color: #fff;
+  margin: 0 6px;
+  font-size: 18px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #000;       /* cambia color al pasar el mouse */
+  transform: scale(1.2);
+}
+.navbar { gap: 12px; }
+
+.navbar__social{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-left: 8px;
+}
+
+.social__label{
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+.hide-xs{ display:inline; }
+@media (max-width:700px){ .hide-xs{ display:none; } }
+
+.soc{
+  display:inline-grid;
+  place-items:center;
+  width:32px; height:32px;
+  border-radius:999px;
+  border:1px solid var(--ring);
+  background: rgba(15,15,16,.6);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.soc svg{
+  width:18px; height:18px;
+  fill:#fff;
+  transition: fill .18s ease;
+}
+.soc:hover{
+  transform: translateY(-1px) scale(1.06);
+  background: rgba(57,255,20,.08);
+  box-shadow: 0 0 0 3px rgba(57,255,20,.12);
+}
+.soc--fb:hover svg{ fill:#1877F2; }
+.soc--tw:hover svg{ fill:#1DA1F2; }
+.soc--ig:hover svg{ fill:#E4405F; }
+
+.footer-main {
+  background:#0b0b0c;
+  color:#fff;
+  padding:40px 20px;
+  border-top:1px solid var(--ring);
+}
+.footer-container {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:32px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.footer-col h3 {
+  font-family:'Orbitron',sans-serif;
+  font-size:16px;
+  margin-bottom:12px;
+}
+.footer-col p,.footer-col a {
+  color:var(--ink-muted);
+  font-size:14px;
+  margin:4px 0;
+}
+.footer-logo { max-width:160px;margin-bottom:12px; }
+.footer-col ul { list-style:none;padding:0;margin:0; }
+.footer-col ul li a:hover { color:var(--accent-2); }
+
+.btn-eliminar{
+  display:block;          /* ocupa el ancho del contenedor */
+  text-align:right; 
+  color: #52fa05ec;      /* alinea el texto del link a la derecha */
+}
