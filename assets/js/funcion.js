@@ -106,6 +106,7 @@ function initRegistroFormValidation(){
   const setError = (input,msg)=>{ const f=input.closest('.field'); const h=f?.querySelector('.field__hint'); f?.classList.add('field--error'); if(h){h.textContent=msg;} };
   const clearError = (input)=>{ const f=input.closest('.field'); const h=f?.querySelector('.field__hint'); f?.classList.remove('field--error'); if(h){h.textContent='';} };
   const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const regex = /^[^\s].*/; // No comienza con espacio
 
   function validate(){
     let ok = true;
@@ -116,6 +117,13 @@ function initRegistroFormValidation(){
       } 
     else
       { document.querySelector('.field__hint').classList.remove('visible'); }
+
+    //codigo que valida que no comience con espacio
+      if (!regex.test(nombre.value)) {
+        event.preventDefault(); // Evita que se envíe el formulario
+        alert("⚠️ El nombre no puede comenzar con espacios.");
+        nombreInput.focus();
+      }
 
     clearError(email); 
      if (!email.value || !validEmail(email.value))
