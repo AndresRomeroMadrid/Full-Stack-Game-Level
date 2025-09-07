@@ -120,8 +120,11 @@ function initRegistroFormValidation(){
 
     //codigo que valida que no comience con espacio
       if (!regex.test(nombre.value)) {
-        event.preventDefault(); // Evita que se envíe el formulario
-        alert("⚠️ El nombre no puede comenzar con espacios.");
+       // event.preventDefault(); // Evita que se envíe el formulario
+        //alert("Manco tu nombre no puede comenzar con espacios.");
+        { setError(nombre,'Manco tu nombre no puede comenzar con espacios. '); ok=false; 
+        document.querySelector('.field__hint').classList.add('visible');
+        }
         nombreInput.focus();
       }
 
@@ -130,9 +133,7 @@ function initRegistroFormValidation(){
       { setError(email,'Manco el mail ingresado no es válido.'); ok=false;  
        
       } 
-      
-
-     
+          
 
     clearError(edad);   const n = Number(edad.value);
     if (!edad.value || Number.isNaN(n)){ setError(edad,'Manco solo se permiten números'); ok=false; }
